@@ -444,6 +444,7 @@ function handleDifficultySwipe(event, buttons) {
 [menuScreen, gameOverScreen, pauseMenuScreen].forEach(screen => {
     const difficultySelector = screen.querySelector('.difficulty-selector');
     if (difficultySelector) {
+        // 添加滑动事件
         difficultySelector.addEventListener('touchstart', function(event) {
             touchStartX = event.touches[0].clientX;
             touchStartY = event.touches[0].clientY;
@@ -456,6 +457,17 @@ function handleDifficultySwipe(event, buttons) {
                           pauseDifficultyButtons;
             handleDifficultySwipe(event, buttons);
             event.preventDefault();
+        });
+        
+        // 为每个难度按钮添加直接点击事件
+        const difficultyOptions = difficultySelector.querySelectorAll('.difficulty-option');
+        difficultyOptions.forEach((btn, index) => {
+            btn.addEventListener('touchend', function(event) {
+                event.stopPropagation(); // 防止冒泡到父级元素
+                // 设置相应的难度
+                setDifficulty(Object.values(DIFFICULTY)[index]);
+                event.preventDefault();
+            });
         });
     }
 });
@@ -1567,6 +1579,27 @@ function resizeCanvas() {
         canvas.style.width = '';
         canvas.style.height = '';
     }
+    
+    // 检测是否为移动设备并适当调整界面
+    if (isMobileDevice()) {
+        // 调整屏幕大小，使其在移动设备上更易于触摸
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.style.fontSize = '16px';
+        });
+        
+        // 增加难度选择按钮的触摸区域
+        document.querySelectorAll('.difficulty-option').forEach(btn => {
+            btn.style.margin = '10px 5px';
+        });
+    }
+}
+
+// 检测是否为移动设备
+function isMobileDevice() {
+    return (window.innerWidth <= 850) || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0) ||
+           (navigator.msMaxTouchPoints > 0);
 }
 
 // 初始调整和窗口大小变化时调整
