@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 data-i18n="game_title">贪吃蛇游戏</h1>
+            <div class="score-info">
+                <div class="score-container">
+                    <span data-i18n="score">分数: </span>
+                    <span id="score">0</span>
+                </div>
+                <div class="high-score-container">
+                    <span data-i18n="high_score">最高分: </span>
+                    <span id="highScore">0</span>
+                </div>
+            </div>
+            <!-- 语言切换按钮 -->
+            <button id="languageToggle" class="language-toggle">English</button>
+        </div>
+        
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <!-- 虚拟方向键 -->
+        <div id="virtualControls" class="virtual-controls">
+            <button id="upBtn" class="control-btn up-btn">↑</button>
+            <div class="horizontal-controls">
+                <button id="leftBtn" class="control-btn left-btn">←</button>
+                <button id="rightBtn" class="control-btn right-btn">→</button>
+            </div>
+            <button id="downBtn" class="control-btn down-btn">↓</button>
+            <button id="pauseBtn" class="control-btn pause-btn">||</button>
+        </div>
+        
+        <!-- 主菜单 -->
+        <div id="menuScreen" class="screen">
+            <h2 data-i18n="game_title">贪吃蛇游戏</h2>
+            <p data-i18n="control_instruction">使用方向键或WASD键控制蛇的移动</p>
+            <p data-i18n="gamepad_support">也支持游戏手柄控制！</p>
+            <p class="mobile-info" data-i18n="mobile_instruction">在手机上，您可以使用虚拟方向键或滑动屏幕来控制</p>
+            
+            <!-- 游戏难度选择 -->
+            <div class="difficulty-selector">
+                <p data-i18n="select_difficulty">选择难度:</p>
+                <div class="difficulty-options">
+                    <button id="easyMode" class="difficulty-option" data-i18n="difficulty_easy">慢速</button>
+                    <button id="mediumMode" class="difficulty-option" data-i18n="difficulty_medium">中速</button>
+                    <button id="hardMode" class="difficulty-option selected" data-i18n="difficulty_hard">快速</button>
+                </div>
+            </div>
+            
+            <button id="startButton" data-i18n="start_game">开始游戏</button>
+        </div>
+        
+        <!-- 暂停菜单 -->
+        <div id="pauseMenuScreen" class="screen hidden">
+            <h2 data-i18n="game_paused">游戏已暂停</h2>
+            <div class="menu-options">
+                <button id="continueButton" class="menu-option selected" data-i18n="continue_game">继续游戏</button>
+                <button id="restartFromPauseButton" class="menu-option" data-i18n="restart_game">重新开始</button>
+            </div>
+            <p class="menu-hint" data-i18n="menu_instruction">使用↑↓方向键选择，回车或START确认</p>
+        </div>
+        
+        <!-- 倒计时界面 -->
+        <div id="countdownScreen" class="screen hidden">
+            <h2 data-i18n="ready_continue">准备继续</h2>
+            <div class="countdown-container">
+                <div id="countdown" class="countdown">3</div>
+            </div>
+        </div>
+        
+        <!-- 游戏结束界面 -->
+        <div id="gameOverScreen" class="screen hidden">
+            <h2 data-i18n="game_over">游戏结束!</h2>
+            <div class="end-scores">
+                <p><span data-i18n="your_score">你的分数: </span><span id="finalScore">0</span></p>
+                <p><span data-i18n="high_score">最高分: </span><span id="finalHighScore">0</span></p>
+            </div>
+            <button id="restartButton" data-i18n="restart_game">重新开始</button>
+        </div>
+        
+        <div class="game-controls">
+            <div class="controls-info">
+                <p data-i18n="controls_title">操作说明:</p>
+                <ul>
+                    <li data-i18n="key_instruction">↑ ↓ ← → 方向键或WASD键: 控制蛇的移动</li>
+                    <li data-i18n="gamepad_instruction">游戏手柄: 方向键或左摇杆控制移动，START键暂停</li>
+                    <li data-i18n="space_instruction">空格键: 暂停/继续</li>
+                    <li class="mobile-info" data-i18n="touch_instruction">触摸控制: 使用屏幕下方的虚拟按钮或滑动</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
