@@ -1,0 +1,35 @@
+/* RTL布局样式（适用于阿拉伯语等从右到左语言） */
+html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .game-header,
+html[dir="rtl"] .game-footer {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .settings-group {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .score-item {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .slider:before {
+    left: unset;
+    right: 4px;
+}
+
+html[dir="rtl"] input:checked + .slider:before {
+    transform: translateX(-26px);
+}
+
+html[dir="rtl"] .theme-selector {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .mobile-controls .horizontal-controls {
+    flex-direction: row-reverse;
+}
