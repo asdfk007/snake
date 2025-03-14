@@ -50,18 +50,24 @@ class Settings {
      * 初始化设置
      */
     init() {
-        // 设置难度选择器
-        const difficultySelect = document.getElementById('difficulty-select');
-        if (difficultySelect) {
-            difficultySelect.value = this.currentSettings.difficulty;
-            difficultySelect.addEventListener('change', (e) => {
-                this.setDifficulty(e.target.value);
-                audioManager.playMenuSelectSound();
-            });
+        try {
+            // 设置难度选择器
+            const difficultySelect = document.getElementById('difficulty-select');
+            if (difficultySelect) {
+                difficultySelect.value = this.currentSettings.difficulty;
+                difficultySelect.addEventListener('change', (e) => {
+                    this.setDifficulty(e.target.value);
+                    if (window.audioManager) {
+                        window.audioManager.playMenuSelectSound();
+                    }
+                });
+            }
+            
+            // 应用当前设置
+            this.applySettings();
+        } catch (error) {
+            console.error('初始化设置时出错:', error);
         }
-        
-        // 应用当前设置
-        this.applySettings();
     }
     
     /**
@@ -96,19 +102,25 @@ class Settings {
      * 应用当前设置
      */
     applySettings() {
-        // 设置主题
-        graphicsManager.setTheme(this.currentSettings.theme);
-        
-        // 设置语言
-        const languageSelect = document.getElementById('language-select');
-        if (languageSelect) {
-            languageSelect.value = this.currentSettings.language;
-        }
-        
-        // 设置声音
-        const soundToggle = document.getElementById('sound-toggle');
-        if (soundToggle) {
-            soundToggle.checked = this.currentSettings.sound;
+        try {
+            // 设置主题
+            if (window.graphicsManager) {
+                window.graphicsManager.setTheme(this.currentSettings.theme);
+            }
+            
+            // 设置语言
+            const languageSelect = document.getElementById('language-select');
+            if (languageSelect) {
+                languageSelect.value = this.currentSettings.language;
+            }
+            
+            // 设置声音
+            const soundToggle = document.getElementById('sound-toggle');
+            if (soundToggle) {
+                soundToggle.checked = this.currentSettings.sound;
+            }
+        } catch (error) {
+            console.error('应用设置时出错:', error);
         }
     }
     
